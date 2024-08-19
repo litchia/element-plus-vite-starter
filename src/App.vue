@@ -1,23 +1,20 @@
 <template>
-  <el-config-provider namespace="ep">
-    <BaseHeader />
-    <div class="flex main-container">
-      <BaseSide />
-      <div w="full" py="4">
-        <Logos my="4" />
-        <HelloWorld msg="Hello Vue 3 + Element Plus + Vite" />
-      </div>
-    </div>
+  <el-config-provider namespace="ep" :size>
+    <el-pagination
+      :page-sizes="[10, 20, 30, 40, 50]"
+      :total="50"
+      :background="true"
+      :layout="'total, prev, pager, next, sizes, jumper'"
+    />
+    <el-button>测试按钮</el-button>
   </el-config-provider>
 </template>
 
-<style>
-#app {
-  text-align: center;
-  color: var(--ep-text-color-primary);
-}
-
-.main-container {
-  height: calc(100vh - var(--ep-menu-item-height) - 3px);
-}
-</style>
+<script setup>
+import { ref } from "vue";
+const size = ref("small");
+window.addEventListener("resize", (e) => {
+  const width = window.innerWidth;
+  size.value = width < 1920 ? "small" : width < 2560 ? "default" : "large";
+});
+</script>
